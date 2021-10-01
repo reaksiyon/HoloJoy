@@ -19,10 +19,7 @@ public class Manager : MonoBehaviour
     private void Start()
     {
         // First spawns are not random!
-
         StartCoroutine(WaitAndDo(0.1f, FirstStart));
-
-
     }
 
     public void FirstStart()
@@ -31,7 +28,11 @@ public class Manager : MonoBehaviour
 
         Instantiate(playerPrefab, spawnPoints[0].transform.position, spawnPoints[0].transform.rotation);
 
-        EnemyAI.Instance.SetRetarget();
+        foreach (var item in EnemyAI.EnemyList)
+        {
+            item.SetRetarget();
+        }
+        
     }
 
     public void SpawnPlayer()
@@ -42,7 +43,10 @@ public class Manager : MonoBehaviour
 
         Instantiate(playerPrefab, spawnPoints[random].transform.position, spawnPoints[random].transform.rotation);
 
-        EnemyAI.Instance.SetRetarget();
+        foreach (var item in EnemyAI.EnemyList)
+        {
+            item.SetRetarget();
+        }
     }
 
     public void SpawnEnemy()

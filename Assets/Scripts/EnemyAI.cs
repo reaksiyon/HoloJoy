@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -40,7 +41,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        EnemyList.Add(this);
 
         enemy = GetComponent<Enemy>();
 
@@ -48,7 +49,12 @@ public class EnemyAI : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
     }
-    
+
+    private void OnDestroy()
+    {
+        EnemyList.Remove(this);
+    }
+
     private void Update()
     {
         //Check for sight and attack range
@@ -197,5 +203,5 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 
-    public static EnemyAI Instance;
+    public static List<EnemyAI> EnemyList = new List<EnemyAI>();
 }

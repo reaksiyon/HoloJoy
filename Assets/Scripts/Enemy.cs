@@ -48,6 +48,5 @@ public class Enemy : MonoBehaviour, IEntity
         GUIManager.Instance.PlayerGetScore();
 
         Destroy(gameObject);
-
     }
 }
